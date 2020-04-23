@@ -6,7 +6,7 @@ logger = logging.getLogger()
 
 def create_api():
 
-    api_key = os.getenv("api_key")
+    api_key = os.getenv("API_KEY")
     api_secret_key = os.getenv("API_SECRET_KEY")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
