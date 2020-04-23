@@ -22,6 +22,7 @@ for (x,y,w,h) in faces:
     print(x)
     print(w)
     
+    # tamanho do rosto
     size_x = int(x) - int(w)
     print(type(size_x))
     
