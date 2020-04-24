@@ -1,14 +1,17 @@
-
 import cv2
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
 
 #TODO: VER PARAMETRO DE ESTICAMENTO DO BABU (1.3 em y pra ajustar o encaixe da face) entra
-#TODO: tamanho variar de acordo com o tamanho do rosto
-#TODO TROCAR ESSAS PORRAS DESSES PRINTS POR LOGGING
+#TODO SALVAR IMAGEM EM ARQUIVO
 #TODO DEIXAR GERAL, PRA QUALQUER PARTICIPANTE
 #TODO MELHORAR TRANSPARENCIA DO BABU
 #TODO MUDAR PERSPECTIVA DO ROSTO
 #TODO MELHORAR RECONHECIMENTO DE ROSTO
 
+logger.info("Carregando a imagem do participante")
 # -1 carrega a img transparente
 babu = cv2.imread('img/babu.png', -1)
 img = cv2.imread('img/photo1.jpg')
@@ -23,6 +26,7 @@ def face_recognition(img_with_faces):
     #TODO VER ESSES PARAMETROS SE MELHROAM ALGUMA COISA
     # Ja retorna uma matriz Nx4 onde N eh o numero de faces detectadas
     faces_found = face_cascade.detectMultiScale(gray, 1.3, 5)
+    logger.info("Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
     return faces_found
 
 
@@ -43,6 +47,7 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
 
     if overlay_size is not None:
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)
+        logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
     # Extract the alpha mask of the RGBA image, convert to RGB
     b, g, r, a = cv2.split(transparent_image_overlay)
@@ -70,8 +75,8 @@ faces = face_recognition(img)
 # No caso de 3 faces, o for fara 3 iteracoes
 for (x,y,w,h) in faces:
     img = overlay_transparent(img, babu, x, y, (w, h))
-    cv2.imshow('provisoria-{}'.format(x), img)
+    logging.info("Um novo rosto foi transformado no do Babu")
 
-cv2.imshow('osso', img)
+cv2.imshow('Imagem Editada', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
