@@ -4,8 +4,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-#TODO: VER PARAMETRO DE ESTICAMENTO DO BABU (1.3 em y pra ajustar o encaixe da face) entra
-#TODO SALVAR IMAGEM EM ARQUIVO
 #TODO DEIXAR GERAL, PRA QUALQUER PARTICIPANTE
 #TODO MELHORAR TRANSPARENCIA DO BABU
 #TODO MUDAR PERSPECTIVA DO ROSTO
@@ -22,15 +20,16 @@ def face_recognition(img_with_faces):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     # Se der empty eh pq o face cascade nao esta sendo carregado
     #print(face_cascade.empty())
-
-    #TODO VER ESSES PARAMETROS SE MELHROAM ALGUMA COISA
-    # Ja retorna uma matriz Nx4 onde N eh o numero de faces detectadas | (image, rejectLevels, levelWeights)
     faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
     logger.info("Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
     return faces_found
 
 
-def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
+# transp_img_over = babu
+# background_img = foto a ser mashed up c/ a do babu
+
+#def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
+def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size):
     """
     	@brief      Coloca uma imagem com transparência por cima de outra que não tem transparência
 
@@ -44,9 +43,16 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     	@return     Background image with overlay on top
     	"""
     bg_img = background_img.copy()
-
+    
     if overlay_size is not None:
-        transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)
+        # dim rosto do babu
+        w_os, h_os = transparent_image_overlay.shape[0:2]
+        babu_ratio = h_os/w_os 
+        #face_ratio = overlay_size[1]/overlay_size[0]
+        #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)  # pegando copia da foto do babu para dar resize com as dim. detectadas
+        # cv2.INTER_CUBIC eh slow segundo o opencv, testar dps ver se faz diferenca no result
+        transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=babu_ratio, fy=babu_ratio, interpolation = cv2.INTER_LINEAR) 
+        cv2.imshow('resized', transparent_image_overlay)
         logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
     # Extract the alpha mask of the RGBA image, convert to RGB
@@ -78,5 +84,8 @@ for (x,y,w,h) in faces:
     logging.info("Um novo rosto foi transformado no do Babu")
 
 cv2.imshow('Imagem Editada', img)
+# TODO: ver mais pra frente pra ir iterando (adicionando um indice?) a cada imagem nova, ja que o programa vai rodar de forma continua
+# Criei essa pasta img_edit pra enviar as editadas, nao sei o que vai ser mais facil nessa parte da API do twitter... 
+cv2.imwrite('../img_edit/teste.jpg', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
