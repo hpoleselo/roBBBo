@@ -11,10 +11,10 @@ logger = logging.getLogger()
 #TODO MUDAR PERSPECTIVA DO ROSTO
 #TODO MELHORAR RECONHECIMENTO DE ROSTO
 
-logger.info("Carregando a imagem do participante")
-# -1 carrega a img transparente
-babu = cv2.imread('img/babu.png', -1)
-img = cv2.imread('img/photo1.jpg')
+logger.info("Carregando a imagem do participante...")
+# -1 carrega a img com fundo transparente
+babu = cv2.imread('../img/babu.png', -1)
+img = cv2.imread('../img/photo1.jpg')
 
 
 def face_recognition(img_with_faces):
@@ -24,8 +24,8 @@ def face_recognition(img_with_faces):
     #print(face_cascade.empty())
 
     #TODO VER ESSES PARAMETROS SE MELHROAM ALGUMA COISA
-    # Ja retorna uma matriz Nx4 onde N eh o numero de faces detectadas
-    faces_found = face_cascade.detectMultiScale(gray, 1.3, 5)
+    # Ja retorna uma matriz Nx4 onde N eh o numero de faces detectadas | (image, rejectLevels, levelWeights)
+    faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
     logger.info("Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
     return faces_found
 
