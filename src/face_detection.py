@@ -1,4 +1,4 @@
-import numpy as np
+
 import cv2
 
 #TODO: VER PARAMETRO DE ESTICAMENTO DO BABU (1.3 em y pra ajustar o encaixe da face) entra
@@ -10,8 +10,8 @@ import cv2
 #TODO MELHORAR RECONHECIMENTO DE ROSTO
 
 # -1 carrega a img transparente
-babu = cv2.imread('babu.png', -1)
-img = cv2.imread('photo1.jpg')
+babu = cv2.imread('img/babu.png', -1)
+img = cv2.imread('img/photo1.jpg')
 
 
 def face_recognition(img_with_faces):
