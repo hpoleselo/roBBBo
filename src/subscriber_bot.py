@@ -2,7 +2,10 @@ import tweepy
 import logging
 import json
 import os
+import urllib
 from twitter_config import create_api
+from talker_bot import talker_bot
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -20,13 +23,17 @@ class hashtagListener(tweepy.StreamListener):
                 for image in tweet.entities['media']:
                     logger.info("Tem uma imagem aí")
                     photoOwner = tweet.user.screen_name
-                    picName = "editada_%s.jpg" % photoOwner
+                    picName = "%s.jpg" % photoOwner
                     link = image['media_url']
-                    filename = os.path.join
+                    filename = os.path.join(photo_directory, picName)
+                    # talvez vamos ter que usar o agent (https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c)
+                    urllib.request.urlretrieve(link, filename)
+
+                    talker_bot(self.api, tweet)
             else:
                 logger.info("Esse post não tem imagem")
-        except:
-            logger.error("Erro ao favoritar tweet")
+        except Exception as e:
+            logger.error("Erro ao favoritar tweet, erro:" + str(e))
 
 def main(keywords):
     api = create_api()

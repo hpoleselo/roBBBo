@@ -5,7 +5,7 @@ import os
 logger = logging.getLogger()
 
 def create_api():
-
+    #TODO CORRIGIR QUE ELE NAO FALA NADA QUANDO TA ERRADA
     api_key = os.getenv("API_KEY")
     api_secret_key = os.getenv("API_SECRET_KEY")
     access_token = os.getenv("ACCESS_TOKEN")
