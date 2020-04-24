@@ -9,6 +9,7 @@ import cv2
 #TODO MUDAR PERSPECTIVA DO ROSTO
 #TODO MELHORAR RECONHECIMENTO DE ROSTO
 
+# -1 carrega a img transparente
 babu = cv2.imread('babu.png', -1)
 img = cv2.imread('photo1.jpg')
 
@@ -68,9 +69,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
 faces = face_recognition(img)
 # No caso de 3 faces, o for fara 3 iteracoes
 for (x,y,w,h) in faces:
-    imagem_editada = overlay_transparent(img, babu, x, y, (w, h))
-    cv2.imshow('provisoria-{}'.format(x), imagem_editada)
+    img = overlay_transparent(img, babu, x, y, (w, h))
+    cv2.imshow('provisoria-{}'.format(x), img)
 
-cv2.imshow('osso', imagem_editada)
+cv2.imshow('osso', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
