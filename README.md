@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="https://pbs.twimg.com/profile_banners/1254066650573410305/1587846642/1500x500" alt="roBBBo" width="400"></a>
+  <a href="#"><img src="https://pbs.twimg.com/profile_banners/1254066650573410305/1587846642/1500x500" alt="roBBBo"></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
