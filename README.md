@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-  <a href="#credits">Creditos</a> •
+  <a href="#credits">Créditos</a> •
   <a href="#authors">Autores</a> •
   <a href="#license">Licença</a>
 </p>
