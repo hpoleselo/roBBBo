@@ -23,8 +23,9 @@
   <img src="https://badgen.net/github/last-commit/hpoleselo/roBBBO">
 </p> 
 
-
-![gif_deles](https://user-images.githubusercontent.com/24254286/80287334-62c7bf00-8707-11ea-8ab4-7a25a3426b44.gif)
+<p align="center"> 
+  <img src="https://user-images.githubusercontent.com/24254286/80287334-62c7bf00-8707-11ea-8ab4-7a25a3426b44.gif">
+</p>
 
 <p align="center">
   <a href="#credits">Creditos</a> •
@@ -68,4 +69,4 @@ Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 * Código do carinha do overlay
 * https://www.remove.bg/
 * GIMP? corte de imagens etc
-* ezgif - converting videos into GIF
+* ezgif - converting videos into
