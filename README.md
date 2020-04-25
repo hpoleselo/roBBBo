@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="assets/automation.png" alt="roBBBo" width="100"></a>
+  <a href="#"><img src="https://user-images.githubusercontent.com/6405603/80291270-9ebc4d80-8722-11ea-9cbd-6f8beeca10c7.jpg" alt="roBBBo" width="100"></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
