@@ -1,7 +1,6 @@
-<!-- LOGO -->
 <h1 align="center">
   <br>
-  <a href="#"><img src="assets/automation.png" alt="RoBBBo" width="100"></a>
+  <a href="#"><img src="assets/automation.png" alt="roBBBo ou RoBBBo?" width="100"></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
@@ -27,8 +26,9 @@
   <img src="https://badgen.net/github/last-commit/PETEletricaUFBA/IoT">
 </p> 
 
-<!-- Menu Principal -->
-<!-- Aqui colocamos páginas principais como creditos, licença, como contribuir, coisas assim..-->
+
+<!-- TODO: Adicionar creditos ao codigo que pegamos, adicionar gif do funcionamento-->
+
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
@@ -36,10 +36,6 @@
   <a href="#authors">Autores</a> •
   <a href="#license">Licença</a>
 </p>
-
-<!-- Sumário -->
-<!-- Tem um nome melhor pra isso? -->
-<!-- Deixar por ultimo -->
 
 ## Sumário 
 
@@ -57,29 +53,30 @@
 
 
 <!-- SOBRE O PROJETO -->
-## roBBBo
-O projeto tem como objetivo apresentar um conteúdo prático, objetivo e de fácil consulta para um pessoa a partir de qualquer conhecimento que ela possua sobre Automação! Este guia conterá projetos iniciais como acender uma LED até como criar um servidor, integrar com um BOT e não sei oq.
+## RoBBBo
+Coming soon
 
-
-<!-- TODO: Adicionar creditos ao codigo que pegamos, adicionar gif do funcionamento-->
 
 <!-- Organização -->
-## Organização
-Aqui fazemos uma breve descrição sobre a trilha de conhecimento do manual
+## Instalação
+Caso deseje reproduzir este algorítmo na sua maquina, o uso de Python3 é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
+
+Adiciona requirements.txt? 
+
+``` $ pip3 install opencv-python```
+
+``` $ pip3 install tweepy ```
 
 
+## Licença
 
-<!-- LICENSE -->
-## License
+Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 
-Distributed under the MIT License. See `LICENSE` for more information.
+## Autores
 
-<!-- CONTACT -->
-## Contact
+* **Daniel Mascarenhas** - [ielson](https://github.com/ielson)
+* **Henrique Poleselo** - [hpoleselo](https://github.com/hpoleselo)
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
 
 
