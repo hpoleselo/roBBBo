@@ -27,7 +27,7 @@ def face_recognition(img_with_faces):
 
 # transp_img_over = babu
 # background_img = foto a ser mashed up c/ a do babu
-def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
+def overlay_transparent(background_img, transparent_image_overlay, x, y, participante, overlay_size=None):
     """
     	@brief      Coloca uma imagem com transparência por cima de outra que não tem transparência
 
@@ -40,7 +40,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
 
     	@return     Background image with overlay on top
     	"""
+    multiplicador_rafa = 1.4
     bg_img = background_img.copy()
+
     
     if overlay_size is not None:
         # dim rosto do babu
@@ -52,9 +54,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
         # BB_CENTER TÁ CERTO, CHEQUEI
         bb_center_img = background_img.copy()
         cv2.circle(bb_center_img, bb_center, 20, (0,0,255), -1)
-        cv2.imshow("BBCenter", bb_center_img)
-        cv2.waitKey(0)
+        #cv2.waitKey(0)
         
+
         
         
         #logger.info(" Dimensoes do personagem: {} {}".format(w_os, h_os))
@@ -65,10 +67,10 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size, interpolation = cv2.INTER_LINEAR)
         #logger.info(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=1, fy=personagem_ratio, interpolation = cv2.INTER_LINEAR)
+        if participante == 'rafa':
+            transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_rafa, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
         #logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
-        transparent_image_overlay_x = transparent_image_overlay.shape[1]
-        transparent_image_overlay_y = transparent_image_overlay.shape[0]
-        #logging.info("tioverl_x e y: {} {}".format(transparent_image_overlay_x, transparent_image_overlay_y))
+        #logging.info("tioverl_x e y: {} {}".format(w, h))
         #logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
     # Extract the alpha mask of the RGBA image, convert to RGB
@@ -82,20 +84,20 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     # tamanho do babu colorido
     h, w, _ = overlay_color.shape
 
-    if transparent_image_overlay_y % 2 == 0:
-        primeiro_vertice_y = bb_center[0] - int(transparent_image_overlay_y/2)
-        segundo_vertice_y = bb_center[0] + int(transparent_image_overlay_y/2)
+    if h % 2 == 0:
+        primeiro_vertice_y = bb_center[1] - int(h/2)
+        segundo_vertice_y = bb_center[1] + int(h/2)
     else:
-        primeiro_vertice_y = bb_center[0] - int(transparent_image_overlay_y/2)
-        segundo_vertice_y = bb_center[0] + int(transparent_image_overlay_y/2) + 1
+        primeiro_vertice_y = bb_center[1] - int(h/2)
+        segundo_vertice_y = bb_center[1] + int(h/2) + 1
 
-    if transparent_image_overlay_x % 2 == 0:
-        primeiro_vertice_x = bb_center[1] - int(transparent_image_overlay_x/2)
-        segundo_vertice_x = bb_center[1] + int(transparent_image_overlay_x/2)
+    if w % 2 == 0:
+        primeiro_vertice_x = bb_center[0] - int(w/2)
+        segundo_vertice_x = bb_center[0] + int(w/2)
     
     else:
-        primeiro_vertice_x = bb_center[1] - int(transparent_image_overlay_x/2)
-        segundo_vertice_x = bb_center[1] + int(transparent_image_overlay_x/2) + 1
+        primeiro_vertice_x = bb_center[0] - int(w/2)
+        segundo_vertice_x = bb_center[0] + int(w/2) + 1
 
 
     # ROI eh o pedaço do rosto da familia 
@@ -120,16 +122,21 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     
     #logger.info(" bbcenter0: {}".format(bb_center[0]))
     #logger.info(" primeiro vert y - seg vert y : {}".format(primeiro_vertice_y - segundo_vertice_y))
-    #logger.info(" transp overlay y: {}".format(transparent_image_overlay_y))
+    #logger.info(" transp overlay y: {}".format(h))
 
 
-    #logger.info(" transp overlay x: {}".format(transparent_image_overlay_x))
+    #logger.info(" transp overlay x: {}".format(w))
 
     #logger.info(" BG Image Shape: {}".format(bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x].shape))
     #logger.info(" img1_bg: {}".format(img1_bg.shape))
     bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x] = cv2.add(img1_bg, img2_fg)
-    cv2.imshow("final", bg_img)
-    cv2.waitKey(0)
+    logger.info(" ytanp im over x: {}".format(w))
+    logger.info(" tranp img over y: {}".format(h))
+    logger.info(" h,w: {} {}".format(h,w))
+
+
+
+    #cv2.waitKey(0)
 
     return bg_img
 
@@ -152,13 +159,13 @@ def main(keywords):
     # No caso de 3 faces, o for fara 3 iteracoes
     for (x, y, w, h) in faces:
 
-        img = overlay_transparent(img, participante_img, x, y, (w, h))
+        img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
         logging.info("Um novo rosto foi transformado no de {}".format(participante))
     cv2.imwrite(edited_photo_path, img)
 
 
     #cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["rafa", "danmascandrade"])
+    main(["babu", "danmascandrade"])

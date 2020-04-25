@@ -5,6 +5,7 @@ import os
 import urllib
 from twitter_config import create_api
 from talker_bot import talker_bot
+import face_detection
 
 
 logging.basicConfig(level=logging.INFO)
@@ -32,7 +33,7 @@ class hashtagListener(tweepy.StreamListener):
                     filename = os.path.join(photo_directory, pessoa, picName)
                     # talvez vamos ter que usar o agent (https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c)
                     urllib.request.urlretrieve(link, filename)
-
+                    face_detection.main([pessoa, photoOwner])
                     talker_bot(self.api, tweet, pessoa)
             else:
                 logger.info("Esse post não tem imagem")
