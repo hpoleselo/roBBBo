@@ -20,14 +20,13 @@ def face_recognition(img_with_faces):
     # Se der empty eh pq o face cascade nao esta sendo carregado
     #print(face_cascade.empty())
     faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
-    logger.info("Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
+    logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
     return faces_found
 
 
 # transp_img_over = babu
 # background_img = foto a ser mashed up c/ a do babu
-#def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
-def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size):
+def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
     """
     	@brief      Coloca uma imagem com transparência por cima de outra que não tem transparência
 
@@ -44,13 +43,17 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     
     if overlay_size is not None:
         # dim rosto do babu
-        w_os, h_os = transparent_image_overlay.shape[0:2]
-        babu_ratio = h_os/w_os 
-        #face_ratio = overlay_size[1]/overlay_size[0]
+        h_os, w_os = transparent_image_overlay.shape[0:2]
+        logger.info(" Dimensoes do personagem: {} {}".format(w_os, h_os))
+        personagem_ratio = h_os/w_os
+        logger.info(" Ratio do personagem: {}".format(personagem_ratio))
         #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)  # pegando copia da foto do babu para dar resize com as dim. detectadas
         # cv2.INTER_CUBIC eh slow segundo o opencv, testar dps ver se faz diferenca no result
-        transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=babu_ratio, fy=babu_ratio, interpolation = cv2.INTER_LINEAR) 
-        cv2.imshow('resized', transparent_image_overlay)
+        #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=face_ratio, fy=overlay_size[1], interpolation = cv2.INTER_LINEAR)(
+        transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size, interpolation = cv2.INTER_LINEAR)
+        logger.info(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
+        transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=1, fy=personagem_ratio, interpolation = cv2.INTER_LINEAR)
+        logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
         logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
     # Extract the alpha mask of the RGBA image, convert to RGB
@@ -79,17 +82,25 @@ def main(keywords):
     participante, user = keywords
     downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
-    logger.info("Carregando a imagem do participante {}".format(participante))
+    logger.info(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
+    #logger.info(" Caminho da imagem editada: {}".format(edited_photo_path))
+    logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
-    participante_img_path = os.path.join("../img/", participante + ".jpg")
+    participante_img_path = os.path.join("../img/", participante + ".png")
+    logger.info(" Carregando imagem do participante: {}".format(participante_img_path))
     participante_img = cv2.imread(participante_img_path, -1)
+    #cv2.imshow('teste', participante_img)
     img = cv2.imread(downloaded_photo_path)
     faces = face_recognition(img)
+
     # No caso de 3 faces, o for fara 3 iteracoes
     for (x, y, w, h) in faces:
+
         img = overlay_transparent(img, participante_img, x, y, (w, h))
         logging.info("Um novo rosto foi transformado no de {}".format(participante))
     cv2.imwrite(edited_photo_path, img)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["babu", "danmascandrade"])
+    main(["rafa", "danmascandrade"])
