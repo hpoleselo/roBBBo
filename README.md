@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="assets/automation.png" alt="roBBBo" width="100"></a>
+  <a href="#"><img src="https://pbs.twimg.com/profile_banners/1254066650573410305/1587846642/1500x500" alt="roBBBo" width=600></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
@@ -11,9 +11,6 @@
 
 <p align="center">
   <a href="https://twitter.com/robbbo20" target="_blank"><img src="https://badgen.net/badge/icon/roBBBo20/blue?icon=twitter&label" alt="Casa do bot"></a>
-  <a href="https://app.codacy.com/gh/PETEletricaUFBA/IoT?utm_source=github.com&utm_medium=referral&utm_content=PETEletricaUFBA/IoT&utm_campaign=Badge_Grade_Dashboard" target="_blank">
-    <img src="https://badgen.net/codacy/grade/a1b5adec51bb42ef90d079504bba374d">
-  </a>
   <a href="https://github.com/hpoleselo/roBBBo/commits/master" target="_blank">
     <img src="https://badgen.net/github/commits/hpoleselo/roBBBO">
   </a>
@@ -26,11 +23,12 @@
   <img src="https://badgen.net/github/last-commit/hpoleselo/roBBBO">
 </p> 
 
-
-<!-- TODO: Adicionar creditos ao codigo que pegamos, adicionar gif do funcionamento-->
+<p align="center"> 
+  <img src="https://user-images.githubusercontent.com/24254286/80287334-62c7bf00-8707-11ea-8ab4-7a25a3426b44.gif">
+</p>
 
 <p align="center">
-  <a href="#credits">Creditos</a> •
+  <a href="#credits">Créditos</a> •
   <a href="#authors">Autores</a> •
   <a href="#license">Licença</a>
 </p>
@@ -38,22 +36,18 @@
 ## Sumário 
 
 * [Sobre o projeto](#sobre-o-projeto)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [License](#license)
-* [Acknowledgements](#acknowledgements)
+* [Instalação | Uso](#installation)
+* [Autores](#authors)
+* [Licença](#license)
+* [Créditos/Reconhecimento](#acknowledgements)
 
-
-<!-- SOBRE O PROJETO -->
 ## RoBBBo
-Coming soon
+Este Bot do Twitter foi criado com a intenção...
 
 
 <!-- Organização -->
 ## Instalação
-Caso deseje reproduzir este algorítmo na sua maquina, o uso de Python3 é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
+Caso deseje reproduzir este algorítmo na sua maquina, o uso do ``` Python3 ``` é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
 
 Adiciona requirements.txt? 
 
@@ -61,18 +55,18 @@ Adiciona requirements.txt?
 
 ``` $ pip3 install tweepy ```
 
-
-## Licença
-
-Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
-
 ## Autores
 
 * **Daniel Mascarenhas** - [ielson](https://github.com/ielson)
 * **Henrique Poleselo** - [hpoleselo](https://github.com/hpoleselo)
 
 
+## Licença
 
+Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 
-<!-- Pra usar a logo, devemos informar o autor -->
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+## Créditos
+* Código do carinha do overlay
+* https://www.remove.bg/
+* GIMP? corte de imagens etc
+* ezgif - converting videos into

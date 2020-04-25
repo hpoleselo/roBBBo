@@ -41,6 +41,8 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
     	@return     Background image with overlay on top
     	"""
     multiplicador_rafa = 1.4
+    multiplicador_manu = 2.0
+    multiplicador_thelma = 1.3
     bg_img = background_img.copy()
 
     
@@ -69,6 +71,11 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=1, fy=personagem_ratio, interpolation = cv2.INTER_LINEAR)
         if participante == 'rafa':
             transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_rafa, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
+        if participante == 'manu':
+            transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_manu, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
+        if participante == 'thelma':
+            transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_thelma, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
+
         #logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
         #logging.info("tioverl_x e y: {} {}".format(w, h))
         #logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
@@ -110,15 +117,12 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
     img2_fg = cv2.bitwise_and(overlay_color, overlay_color, mask=mask)
 
 
-
     # SENHA DO PC EH surfisup
     # pode tirar, to vendo a teoria aqui
 
     #bb_center[0]:bb_center - h, bb_center[1]:bb_center 
     # Update the original image with our new ROI
     #bg_img[y:y + h, x:x + w] = cv2.add(img1_bg, img2_fg)
-    
-   
     
     #logger.info(" bbcenter0: {}".format(bb_center[0]))
     #logger.info(" primeiro vert y - seg vert y : {}".format(primeiro_vertice_y - segundo_vertice_y))
@@ -145,7 +149,7 @@ def main(keywords):
     participante, user = keywords
     downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
-    logger.info(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
+    #logger.info(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
     #logger.info(" Caminho da imagem editada: {}".format(edited_photo_path))
     logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
@@ -168,4 +172,4 @@ def main(keywords):
     #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["babu", "danmascandrade"])
+    main(["rafa", "eles"])

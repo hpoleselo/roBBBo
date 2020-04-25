@@ -48,4 +48,4 @@ def main(keywords):
     stream.filter(track=keywords)
 
 if __name__ == "__main__":
-    main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoTelma"])
+    main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
