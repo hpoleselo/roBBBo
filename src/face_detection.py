@@ -2,6 +2,7 @@ import cv2
 import logging
 import os
 
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
@@ -44,36 +45,91 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     if overlay_size is not None:
         # dim rosto do babu
         h_os, w_os = transparent_image_overlay.shape[0:2]
-        logger.info(" Dimensoes do personagem: {} {}".format(w_os, h_os))
+        logger.info("X {}, Y {}, Overlay_size {}".format(x, y, overlay_size[0]))
+        bb_center = (x + int(overlay_size[0]/2) , y + int(overlay_size[1]/2))
+        logger.info("BB center {}x{}".format(bb_center[0], bb_center[1]))
+
+        # BB_CENTER TÁ CERTO, CHEQUEI
+        bb_center_img = background_img.copy()
+        cv2.circle(bb_center_img, bb_center, 20, (0,0,255), -1)
+        cv2.imshow("BBCenter", bb_center_img)
+        cv2.waitKey(0)
+        
+        
+        
+        #logger.info(" Dimensoes do personagem: {} {}".format(w_os, h_os))
         personagem_ratio = h_os/w_os
-        logger.info(" Ratio do personagem: {}".format(personagem_ratio))
+        #logger.info(" Ratio do personagem: {}".format(personagem_ratio))
         #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)  # pegando copia da foto do babu para dar resize com as dim. detectadas
         # cv2.INTER_CUBIC eh slow segundo o opencv, testar dps ver se faz diferenca no result
-        #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=face_ratio, fy=overlay_size[1], interpolation = cv2.INTER_LINEAR)(
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size, interpolation = cv2.INTER_LINEAR)
-        logger.info(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
+        #logger.info(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
         transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=1, fy=personagem_ratio, interpolation = cv2.INTER_LINEAR)
-        logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
-        logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
+        #logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
+        transparent_image_overlay_x = transparent_image_overlay.shape[1]
+        transparent_image_overlay_y = transparent_image_overlay.shape[0]
+        #logging.info("tioverl_x e y: {} {}".format(transparent_image_overlay_x, transparent_image_overlay_y))
+        #logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
     # Extract the alpha mask of the RGBA image, convert to RGB
     b, g, r, a = cv2.split(transparent_image_overlay)
+    # babu sem parte transp
     overlay_color = cv2.merge((b, g, r))
 
     # Apply some simple filtering to remove edge noise
     mask = cv2.medianBlur(a, 5)
 
+    # tamanho do babu colorido
     h, w, _ = overlay_color.shape
-    roi = bg_img[y:y + h, x:x + w]
 
-    # Black-out the area behind the logo in our original ROI
+    if transparent_image_overlay_y % 2 == 0:
+        primeiro_vertice_y = bb_center[0] - int(transparent_image_overlay_y/2)
+        segundo_vertice_y = bb_center[0] + int(transparent_image_overlay_y/2)
+    else:
+        primeiro_vertice_y = bb_center[0] - int(transparent_image_overlay_y/2)
+        segundo_vertice_y = bb_center[0] + int(transparent_image_overlay_y/2) + 1
+
+    if transparent_image_overlay_x % 2 == 0:
+        primeiro_vertice_x = bb_center[1] - int(transparent_image_overlay_x/2)
+        segundo_vertice_x = bb_center[1] + int(transparent_image_overlay_x/2)
+    
+    else:
+        primeiro_vertice_x = bb_center[1] - int(transparent_image_overlay_x/2)
+        segundo_vertice_x = bb_center[1] + int(transparent_image_overlay_x/2) + 1
+
+
+    # ROI eh o pedaço do rosto da familia 
+    roi = bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x]
+
+    # Black-out the area behind the logo(fg) in our original ROI
     img1_bg = cv2.bitwise_and(roi.copy(), roi.copy(), mask=cv2.bitwise_not(mask))
 
     # Mask out the logo from the logo image.
     img2_fg = cv2.bitwise_and(overlay_color, overlay_color, mask=mask)
 
+
+
+    # SENHA DO PC EH surfisup
+    # pode tirar, to vendo a teoria aqui
+
+    #bb_center[0]:bb_center - h, bb_center[1]:bb_center 
     # Update the original image with our new ROI
-    bg_img[y:y + h, x:x + w] = cv2.add(img1_bg, img2_fg)
+    #bg_img[y:y + h, x:x + w] = cv2.add(img1_bg, img2_fg)
+    
+   
+    
+    #logger.info(" bbcenter0: {}".format(bb_center[0]))
+    #logger.info(" primeiro vert y - seg vert y : {}".format(primeiro_vertice_y - segundo_vertice_y))
+    #logger.info(" transp overlay y: {}".format(transparent_image_overlay_y))
+
+
+    #logger.info(" transp overlay x: {}".format(transparent_image_overlay_x))
+
+    #logger.info(" BG Image Shape: {}".format(bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x].shape))
+    #logger.info(" img1_bg: {}".format(img1_bg.shape))
+    bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x] = cv2.add(img1_bg, img2_fg)
+    cv2.imshow("final", bg_img)
+    cv2.waitKey(0)
 
     return bg_img
 
@@ -99,8 +155,10 @@ def main(keywords):
         img = overlay_transparent(img, participante_img, x, y, (w, h))
         logging.info("Um novo rosto foi transformado no de {}".format(participante))
     cv2.imwrite(edited_photo_path, img)
+
+
     #cv2.waitKey(0)
-    #cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main(["rafa", "danmascandrade"])
