@@ -15,15 +15,15 @@
     <img src="https://badgen.net/codacy/grade/a1b5adec51bb42ef90d079504bba374d">
   </a>
   <a href="https://github.com/hpoleselo/roBBBo/commits/master" target="_blank">
-    <img src="https://badgen.net/github/commits/PETEletricaUFBA/IoT">
+    <img src="https://badgen.net/github/commits/hpoleselo/roBBBO">
   </a>
   <a href="https://github.com/hpoleselo/roBBBo/graphs/contributors" target="_blank">
-    <img src="https://badgen.net/github/contributors/PETEletricaUFBA/IoT">
+    <img src="https://badgen.net/github/contributors/hpoleselo/roBBBO">
   </a>
   <a href="#">
-    <img src="https://badgen.net/github/license/PETEletricaUFBA/IoT">
+    <img src="https://badgen.net/github/license/hpoleselo/roBBBO">
   </a>
-  <img src="https://badgen.net/github/last-commit/PETEletricaUFBA/IoT">
+  <img src="https://badgen.net/github/last-commit/hpoleselo/roBBBO">
 </p> 
 
 
