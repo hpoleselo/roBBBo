@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="assets/automation.png" alt="roBBBo ou RoBBBo?" width="100"></a>
+  <a href="#"><img src="assets/automation.png" alt="roBBBo" width="100"></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
@@ -14,10 +14,10 @@
   <a href="https://app.codacy.com/gh/PETEletricaUFBA/IoT?utm_source=github.com&utm_medium=referral&utm_content=PETEletricaUFBA/IoT&utm_campaign=Badge_Grade_Dashboard" target="_blank">
     <img src="https://badgen.net/codacy/grade/a1b5adec51bb42ef90d079504bba374d">
   </a>
-  <a href="https://github.com/PETEletricaUFBA/IoT/commits/" target="_blank">
+  <a href="https://github.com/hpoleselo/roBBBo/commits/master" target="_blank">
     <img src="https://badgen.net/github/commits/PETEletricaUFBA/IoT">
   </a>
-  <a href="https://github.com/PETEletricaUFBA/IoT/graphs/contributors" target="_blank">
+  <a href="https://github.com/hpoleselo/roBBBo/graphs/contributors" target="_blank">
     <img src="https://badgen.net/github/contributors/PETEletricaUFBA/IoT">
   </a>
   <a href="#">
@@ -30,8 +30,6 @@
 <!-- TODO: Adicionar creditos ao codigo que pegamos, adicionar gif do funcionamento-->
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
   <a href="#credits">Creditos</a> •
   <a href="#authors">Autores</a> •
   <a href="#license">Licença</a>
@@ -40,15 +38,11 @@
 ## Sumário 
 
 * [Sobre o projeto](#sobre-o-projeto)
-  * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
 * [License](#license)
-* [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
 
