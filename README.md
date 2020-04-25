@@ -7,10 +7,10 @@
 </h1>
 
 
-<h4 align="center">Um bot para o Twitter que adiciona caras dos participantes do BBB na sua foto! </h4>
+<h4 align="center">Um bot para o Twitter que adiciona as caras dos participantes do BBB na sua foto! </h4>
 
 <p align="center">
-  <a href="http://www.peteletrica.eng.ufba.br/2017/" target="_blank"><img src="https://badgen.net/badge/icon/PET Elétrica/blue?icon=bitcoin-lightning&label" alt="Site do PET Elétrica"></a>
+  <a href="https://twitter.com/robbbo20" target="_blank"><img src="https://badgen.net/badge/icon/roBBBo20/blue?icon=twitter&label" alt="Casa do bot"></a>
   <a href="https://app.codacy.com/gh/PETEletricaUFBA/IoT?utm_source=github.com&utm_medium=referral&utm_content=PETEletricaUFBA/IoT&utm_campaign=Badge_Grade_Dashboard" target="_blank">
     <img src="https://badgen.net/codacy/grade/a1b5adec51bb42ef90d079504bba374d">
   </a>
