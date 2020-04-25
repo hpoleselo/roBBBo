@@ -1,18 +1,22 @@
 import tweepy
 import logging
+import os
 from twitter_config import create_api
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
+photo_directory = "../img/editadas"
 
-def talker_bot(api, tweet):
+def talker_bot(api, tweet, pessoa):
     logger.info("Iniciando o bot falador")
     user = tweet.user.screen_name
     logger.info("Vou responder o tweet de {}".format(user))
     try:
         #if not tweet.user.id == api.me().id:
-        media = api.media_upload("../fotos_editadas/{}.jpg".format(user))
+        filename = os.path.join(photo_directory, pessoa, user + ".jpg")
+        logger.info("Caminho do arquivo: {}".format(filename))
+        media = api.media_upload(filename)
         api.update_status(status="Teste oficial", in_reply_to_status_id=tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
         logger.info("Tweet postado")
         #else:
