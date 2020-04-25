@@ -1,18 +1,17 @@
 import cv2
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+photo_directory_downloaded = "../img/baixadas"
+photo_directory_edited = "../img/editadas"
 
 #TODO DEIXAR GERAL, PRA QUALQUER PARTICIPANTE
 #TODO MELHORAR TRANSPARENCIA DO BABU
 #TODO MUDAR PERSPECTIVA DO ROSTO
 #TODO MELHORAR RECONHECIMENTO DE ROSTO
-
-logger.info("Carregando a imagem do participante...")
-# -1 carrega a img com fundo transparente
-babu = cv2.imread('../img/babu.png', -1)
-img = cv2.imread('../img/photo1.jpg')
 
 
 def face_recognition(img_with_faces):
@@ -27,7 +26,6 @@ def face_recognition(img_with_faces):
 
 # transp_img_over = babu
 # background_img = foto a ser mashed up c/ a do babu
-
 #def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size=None):
 def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay_size):
     """
@@ -77,15 +75,21 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, overlay
     return bg_img
 
 
-faces = face_recognition(img)
-# No caso de 3 faces, o for fara 3 iteracoes
-for (x,y,w,h) in faces:
-    img = overlay_transparent(img, babu, x, y, (w, h))
-    logging.info("Um novo rosto foi transformado no do Babu")
+def main(keywords):
+    participante, user = keywords
+    downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
+    edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
+    logger.info("Carregando a imagem do participante {}".format(participante))
+    # -1 carrega a img com fundo transparente
+    participante_img_path = os.path.join("../img/", participante + ".jpg")
+    participante_img = cv2.imread(participante_img_path, -1)
+    img = cv2.imread(downloaded_photo_path)
+    faces = face_recognition(img)
+    # No caso de 3 faces, o for fara 3 iteracoes
+    for (x, y, w, h) in faces:
+        img = overlay_transparent(img, participante_img, x, y, (w, h))
+        logging.info("Um novo rosto foi transformado no de {}".format(participante))
+    cv2.imwrite(edited_photo_path, img)
 
-cv2.imshow('Imagem Editada', img)
-# TODO: ver mais pra frente pra ir iterando (adicionando um indice?) a cada imagem nova, ja que o programa vai rodar de forma continua
-# Criei essa pasta img_edit pra enviar as editadas, nao sei o que vai ser mais facil nessa parte da API do twitter... 
-cv2.imwrite('../img_edit/teste.jpg', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    main(["babu", "danmascandrade"])
