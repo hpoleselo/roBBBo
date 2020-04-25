@@ -11,9 +11,6 @@
 
 <p align="center">
   <a href="https://twitter.com/robbbo20" target="_blank"><img src="https://badgen.net/badge/icon/roBBBo20/blue?icon=twitter&label" alt="Casa do bot"></a>
-  <a href="https://app.codacy.com/gh/PETEletricaUFBA/IoT?utm_source=github.com&utm_medium=referral&utm_content=PETEletricaUFBA/IoT&utm_campaign=Badge_Grade_Dashboard" target="_blank">
-    <img src="https://badgen.net/codacy/grade/a1b5adec51bb42ef90d079504bba374d">
-  </a>
   <a href="https://github.com/hpoleselo/roBBBo/commits/master" target="_blank">
     <img src="https://badgen.net/github/commits/hpoleselo/roBBBO">
   </a>
@@ -27,7 +24,7 @@
 </p> 
 
 
-<!-- TODO: Adicionar creditos ao codigo que pegamos, adicionar gif do funcionamento-->
+GIFZAO AQUI
 
 <p align="center">
   <a href="#credits">Creditos</a> •
@@ -38,22 +35,18 @@
 ## Sumário 
 
 * [Sobre o projeto](#sobre-o-projeto)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [License](#license)
-* [Acknowledgements](#acknowledgements)
+* [Instalação | Uso](#installation)
+* [Autores](#authors)
+* [Licença](#license)
+* [Créditos/Reconhecimento](#acknowledgements)
 
-
-<!-- SOBRE O PROJETO -->
 ## RoBBBo
-Coming soon
+Este Bot do Twitter foi criado com a intenção...
 
 
 <!-- Organização -->
 ## Instalação
-Caso deseje reproduzir este algorítmo na sua maquina, o uso de Python3 é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
+Caso deseje reproduzir este algorítmo na sua maquina, o uso do ``` Python3 ``` é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
 
 Adiciona requirements.txt? 
 
@@ -61,18 +54,17 @@ Adiciona requirements.txt?
 
 ``` $ pip3 install tweepy ```
 
-
-## Licença
-
-Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
-
 ## Autores
 
 * **Daniel Mascarenhas** - [ielson](https://github.com/ielson)
 * **Henrique Poleselo** - [hpoleselo](https://github.com/hpoleselo)
 
 
+## Licença
 
+Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 
-<!-- Pra usar a logo, devemos informar o autor -->
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+## Créditos
+* Código do carinha do overlay
+* https://www.remove.bg/
+* GIMP? corte de imagens etc
