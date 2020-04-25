@@ -7,7 +7,7 @@
 </h1>
 
 
-<h4 align="center">Um bot para o Twitter que adiciona as caras dos participantes do BBB na sua foto! </h4>
+<h4 align="center">Um bot para o Twitter que adiciona as caras do seu participante favorito do BBB na foto que você postar! </h4>
 
 <p align="center">
   <a href="https://twitter.com/robbbo20" target="_blank"><img src="https://badgen.net/badge/icon/roBBBo20/blue?icon=twitter&label" alt="Casa do bot"></a>
