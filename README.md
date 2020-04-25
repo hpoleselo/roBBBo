@@ -1,9 +1,7 @@
-> Modelo sendo criado ainda, após isso teremos um esboço
-
 <!-- LOGO -->
 <h1 align="center">
   <br>
-  <a href="#"><img src="assets/automation.png" alt="roBBBo" width="100"></a>
+  <a href="#"><img src="assets/automation.png" alt="RoBBBo" width="100"></a>
   <br>
   Bot do Twitter para você virar um BBBer
   <br>
