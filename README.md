@@ -28,12 +28,10 @@
 </p>
 
 <p align="center">
-  <a href="#credits">Créditos</a> •
-  <a href="#authors">Autores</a> •
-  <a href="#license">Licença</a>
-</p>
-
-## Sumário 
+  <a href="#roBBBo">Créditos</a> •
+  <a href="#Instalação">Autores</a> •
+  <a href="#Licença">Licença</a>
+</p> 
 
 * [Sobre o projeto](#sobre-o-projeto)
 * [Instalação | Uso](#installation)
@@ -41,7 +39,7 @@
 * [Licença](#license)
 * [Créditos/Reconhecimento](#acknowledgements)
 
-## RoBBBo
+## roBBBo
 Programa desenvolvido em Python usando a biblioteca ``` OpenCV ``` e seus classificadores já treinados ``` haarcascade ``` para o reconhecimento das faces nas imagens dadas pelos usuários. Para a obtenção das imagens e uma interação mais interessante, decidimos por usar a API do Twitter ``` tweepy ```, onde o usuário realiza uma postagem com a hashtag do seu participante desejado ``` #robbbobabu ```, ``` #robbbomanu ```, ``` #robbbothelma ``` ou ``` #robbborafa ``` (os atuais finalistas do programa).
 
 ## Instalação
@@ -62,6 +60,8 @@ Exportar as credenciais ... export (fazer um shell script)
 ## Licença
 
 Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
+
+[Some text](#markdown-header-roBBBo)
 
 ## Créditos
 * Código do carinha do overlay
