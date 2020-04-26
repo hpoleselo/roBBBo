@@ -6,8 +6,6 @@
   <br>
 </h1>
 
-### <a name="pookie"></a>Some heading
-
 <h4 align="center">Bot do Twitter para você virar um BBBer </h4>
 
 <p align="center">
@@ -29,7 +27,7 @@
 </p>
 
 <p align="center">
-  <a href="#roBBBo">Créditos</a> •
+  <a href="#credits">Créditos</a> •
   <a href="#Instalação">Autores</a> •
   <a href="#Licença">Licença</a>
 </p> 
@@ -62,11 +60,9 @@ Exportar as credenciais ... export (fazer um shell script)
 
 Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 
-Take me to [pookie](#pookie)
-
-[Some text](#markdown-header-roBBBo)
-
-## Créditos
+<!-- Usando anchor pra poder referenciar este header no menu acima -->
+<!-- Para referencia-lo, fazemos: Me leve para [Créditos](#credits) -->
+## <a name="credits"></a> Créditos
 * Código do carinha do overlay
 * https://www.remove.bg/ - Para deixar o fundo transparente em .png
 * GIMP - Para o corte de imagens e deixar apenas a face
