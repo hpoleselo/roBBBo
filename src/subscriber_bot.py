@@ -43,9 +43,11 @@ class hashtagListener(tweepy.StreamListener):
 def main(keywords):
     api = create_api()
     tweets_listener = hashtagListener(api)
+    logger.info("Escutando a hashtag...")
     stream = tweepy.Stream(api.auth, tweets_listener)
     #Streams do not terminate unless the connection is closed, blocking the thread. Tweepy offers a convenient is_async parameter on filter so the stream will run on a new thread. For example
     stream.filter(track=keywords)
+    logger.info("Hashtag escutada...")
 
 if __name__ == "__main__":
     main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
