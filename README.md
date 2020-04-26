@@ -51,6 +51,8 @@ Caso deseje reproduzir este algorítmo na sua maquina, o uso do ``` Python3 ``` 
 
 ``` $ pip3 install tweepy ```
 
+Exportar as credenciais ... export (fazer um shell script)
+
 ## Autores
 
 * **Daniel Mascarenhas** - [ielson](https://github.com/ielson)
