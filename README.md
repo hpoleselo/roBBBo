@@ -27,43 +27,51 @@
 </p>
 
 <p align="center">
-  <a href="#credits">Créditos</a> •
-  <a href="#Instalação">Autores</a> •
-  <a href="#Licença">Licença</a>
+  <a href="#project">Projeto</a> •
+  <a href="#installation">Instalação | Uso</a> •
+  <a href="#authors">Autores</a> •
+  <a href="#license">Licença</a> •
+  <a href="#credits">Créditos</a>
 </p> 
 
-* [Sobre o projeto](#sobre-o-projeto)
-* [Instalação | Uso](#installation)
-* [Autores](#authors)
-* [Licença](#license)
-* [Créditos/Reconhecimento](#acknowledgements)
-
-## roBBBo
+## <a name="project"></a> roBBBo
 Programa desenvolvido em Python usando a biblioteca ``` OpenCV ``` e seus classificadores já treinados ``` haarcascade ``` para o reconhecimento das faces nas imagens dadas pelos usuários. Para a obtenção das imagens e uma interação mais interessante, decidimos por usar a API do Twitter ``` tweepy ```, onde o usuário realiza uma postagem com a hashtag do seu participante desejado ``` #robbbobabu ```, ``` #robbbomanu ```, ``` #robbbothelma ``` ou ``` #robbborafa ``` (os atuais finalistas do programa).
 
-## Instalação
-Caso deseje reproduzir este algorítmo na sua maquina, o uso do ``` Python3 ``` é necessário assim como o ``` pip ``` para instalar algumas bibliotecas:
+## <a name="installation"></a> Instalação | Uso
+Caso deseje reproduzir este algorítmo na sua maquina, o uso do ``` Python3 ``` é necessário assim como o ``` pip ``` para instalar algumas bibliotecas, para instalar as dependências do projeto, rode o seguinte comando na pasta do projeto:
 
-``` $ pip3 install opencv-python```
+``` $ pip3 install -r requirements.txt```
 
-``` $ pip3 install tweepy ```
+Para usar a API do Twitter você necessitará exportar as credenciais toda vez em um terminal novo que for rodar o programa, por isso, crie um ``` alias ``` para seu ``` .bashrc ```:
 
-Exportar as credenciais ... export (fazer um shell script)
+``` $ cd ~/ ```
 
-## Autores
+``` $ echo "alias twitter-export='export export API_KEY=SUA_API_KEY ; export API_SECRET_KEY=SUA_API_SECRET_KEY; export ACCESS_TOKEN=SEU_ACCESS_TOKEN ; export ACCESS_TOKEN_SECRET=SEU_ACCESS_TOKEN_SECRET ;'" >> .bashrc ```
+
+Colocando os respectivos valores fornecidos pelo Twitter para ``` SUA_API_KEY ```, ``` SUA_API_SECRET_KEY ```, ``` SEU_ACCESS_TOKEN ``` e ``` SEU_ACCESS_TOKEN_SECRET ```.
+
+Depois é só dar o comando para exportar as chaves da API:
+
+``` $ twitter-export ```
+
+Após exportar as chaves, podemos rodar o programa para escutar as hashtags e realizar a detecção:
+
+``` $ python3 subscriber_bot.py ```
+
+## <a name="authors"></a> Autores
 
 * **Daniel Mascarenhas** - [ielson](https://github.com/ielson)
 * **Henrique Poleselo** - [hpoleselo](https://github.com/hpoleselo)
 
 
-## Licença
+## <a name="license"></a> Licença
 
 Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 
 <!-- Usando anchor pra poder referenciar este header no menu acima -->
 <!-- Para referencia-lo, fazemos: Me leve para [Créditos](#credits) -->
 ## <a name="credits"></a> Créditos
-* Código do carinha do overlay
+* [Técnica do overlay das imagens](https://gist.github.com/clungzta/b4bbb3e2aa0490b0cfcbc042184b0b4e)
 * https://www.remove.bg/ - Para deixar o fundo transparente em .png
 * GIMP - Para o corte de imagens e deixar apenas a face
 * ezgif - Para gerar os gifs usados nesta página
