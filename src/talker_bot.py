@@ -24,7 +24,7 @@ def talker_bot(api, tweet, pessoa):
             elif pessoa == "rafa":
                 mensagem = "Vote pra eu ganhar com todos os seus jeitos falas, andados posicionamentos, etc #robbborafa"
             elif pessoa == "thelma":
-                mensagem "Inimigos do fim, me ajudem a ganhar esse jogo! #robbbothelma" 
+                mensagem = "Inimigos do fim, me ajudem a ganhar esse jogo! #robbbothelma" 
             api.update_status(status=mensagem, in_reply_to_status_id=tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
             logger.info("Tweet postado")
         else:
