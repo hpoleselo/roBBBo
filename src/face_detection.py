@@ -20,9 +20,14 @@ def face_recognition(img_with_faces):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     # Se der empty eh pq o face cascade nao esta sendo carregado
     #print(face_cascade.empty())
-    faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
-    logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
-    return faces_found
+    try:
+        faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
+        logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
+        return faces_found
+    except AttributeError as e:
+        logger.error("Não foi encontrada nenhuma face.")
+        faces_found = ()
+        return faces_found
 
 
 # transp_img_over = babu
@@ -40,6 +45,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
 
     	@return     Background image with overlay on top
     	"""
+
+    #rostoEncontrado = True
+    
     try:
         multiplicador_rafa = 1.4
         multiplicador_manu = 2.0
@@ -135,15 +143,14 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         logger.info(" tranp img over y: {}".format(h))
         logger.info(" h,w: {} {}".format(h,w))
 
-
-
         #cv2.waitKey(0)
-
         return bg_img
 
     except Exception as e:
         logger.error("Por alguma razão, não deu, amigo. :".format(str(e)))
-        return "Deu ruim"
+        #rostoEncontrado = False
+        # Qual imagem retornar? return img1_bg, rostoEncontrado
+        return bg_img
 
 def main(keywords):
     participante, user = keywords
@@ -154,26 +161,31 @@ def main(keywords):
     logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
     participante_img_path = os.path.join("../img/", participante + ".png")
-    logger.info(" Carregando imagem do participante: {}".format(participante_img_path))
     participante_img = cv2.imread(participante_img_path, -1)
     #cv2.imshow('teste', participante_img)
     img = cv2.imread(downloaded_photo_path)
+    
+    rostoEncontrado = True
+
     faces = face_recognition(img)
+    if len(faces) == 0:
+        rostoEncontrado = False
 
-    # No caso de 3 faces, o for fara 3 iteracoes
-    for (x, y, w, h) in faces:
-
-        img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
-        #TODO comparacao ponto a ponto ta dando erro
-        if img == "Deu ruim":
-            break
-        logging.info("Um novo rosto foi transformado no de {}".format(participante))
-    if img != "Deu ruim":
-        cv2.imwrite(edited_photo_path, img)
+    elif(rostoEncontrado):
+        # No caso de 3 faces, o for fara 3 iteracoes
+        for (x, y, w, h) in faces:
+            img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
+            #TODO comparacao ponto a ponto ta dando erro
+            if rostoEncontrado == False:
+                break
+        if rostoEncontrado:
+            cv2.imwrite(edited_photo_path, img)
+            # Confirmar com Dan se eh aqui mesmo
+            logging.info("Um novo rosto foi transformado no de {}".format(participante))
 
 
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["thelma", "boramofio"])
+    main(["babu", "boramofio"])
