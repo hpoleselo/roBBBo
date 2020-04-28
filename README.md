@@ -11,15 +11,15 @@
 <p align="center">
   <a href="https://twitter.com/robbbo20" target="_blank"><img src="https://badgen.net/badge/icon/roBBBo20/blue?icon=twitter&label" alt="Casa do bot"></a>
   <a href="https://github.com/hpoleselo/roBBBo/commits/master" target="_blank">
-    <img src="https://badgen.net/github/commits/hpoleselo/roBBBO">
+    <img src="https://badgen.net/github/commits/hpoleselo/roBBBo">
   </a>
   <a href="https://github.com/hpoleselo/roBBBo/graphs/contributors" target="_blank">
-    <img src="https://badgen.net/github/contributors/hpoleselo/roBBBO">
+    <img src="https://badgen.net/github/contributors/hpoleselo/roBBBo">
   </a>
   <a href="#">
-    <img src="https://badgen.net/github/license/hpoleselo/roBBBO">
+    <img src="https://badgen.net/github/license/hpoleselo/roBBBo">
   </a>
-  <img src="https://badgen.net/github/last-commit/hpoleselo/roBBBO">
+  <img src="https://badgen.net/github/last-commit/hpoleselo/roBBBo">
 </p> 
 
 <p align="center"> 
