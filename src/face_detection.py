@@ -141,8 +141,8 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
 
         return bg_img
 
-    except:
-        logger.error("Por alguma razão, não deu, amigo.")
+    except Exception as e:
+        logger.error("Por alguma razão, não deu, amigo. :".format(str(e)))
         return "Deu ruim"
 
 def main(keywords):
@@ -164,6 +164,7 @@ def main(keywords):
     for (x, y, w, h) in faces:
 
         img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
+        #TODO comparacao ponto a ponto ta dando erro
         if img == "Deu ruim":
             break
         logging.info("Um novo rosto foi transformado no de {}".format(participante))
@@ -175,4 +176,4 @@ def main(keywords):
     #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["rafa", "test"])
+    main(["thelma", "boramofio"])
