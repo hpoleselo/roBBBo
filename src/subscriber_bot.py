@@ -50,6 +50,10 @@ def main(keywords):
     if args.v:
         logging.getLogger().setLevel(logging.DEBUG)
         logger.debug("Nível do logger: {}".format(logging.getLogger().level))
+    else:
+        # The index matches the order from the handlers in your logging configuration (any previous handlers on a given logger are cleared whet the config is loaded).
+        console_handler = logging.getLogger().handlers[0]
+        console_handler.setLevel(logging.INFO)
     api = create_api()
     tweets_listener = hashtagListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
