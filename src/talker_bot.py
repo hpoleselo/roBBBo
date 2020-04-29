@@ -4,7 +4,7 @@ import os
 from twitter_config import create_api
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 photo_directory = "../img/editadas"
 
@@ -15,7 +15,7 @@ def talker_bot(api, tweet, pessoa):
     try:
         if not tweet.user.id == api.me().id:
             filename = os.path.join(photo_directory, pessoa, user + ".jpg")
-            logger.info("Caminho do arquivo: {}".format(filename))
+            logger.debug("Caminho do arquivo: {}".format(filename))
             media = api.media_upload(filename)
             if pessoa == "babu":
                 mensagem = "Deixa o paizão ganhar! #robbobabu"
