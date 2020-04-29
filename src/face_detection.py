@@ -2,9 +2,8 @@ import cv2
 import logging
 import os
 
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger()
+#logging.basicConfig(level=logging.DEBUG)
+#logger = logging.getLogger()
 
 photo_directory_downloaded = "../img/baixadas"
 photo_directory_edited = "../img/editadas"
@@ -20,9 +19,14 @@ def face_recognition(img_with_faces):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     # Se der empty eh pq o face cascade nao esta sendo carregado
     #print(face_cascade.empty())
-    faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
-    logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
-    return faces_found
+    try:
+        faces_found = face_cascade.detectMultiScale(gray, 1.2, 5)
+        logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
+        return faces_found
+    except AttributeError as e:
+        logger.warning("Não foi encontrada nenhuma face.")
+        faces_found = ()
+        return faces_found
 
 
 # transp_img_over = babu
@@ -40,6 +44,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
 
     	@return     Background image with overlay on top
     	"""
+
+    #rostoEncontrado = True
+    
     try:
         multiplicador_rafa = 1.4
         multiplicador_manu = 2.0
@@ -50,9 +57,9 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         if overlay_size is not None:
             # dim rosto do babu
             h_os, w_os = transparent_image_overlay.shape[0:2]
-            logger.info("X {}, Y {}, Overlay_size {}".format(x, y, overlay_size[0]))
+            logger.debug("X {}, Y {}, Overlay_size {}".format(x, y, overlay_size[0]))
             bb_center = (x + int(overlay_size[0]/2) , y + int(overlay_size[1]/2))
-            logger.info("BB center {}x{}".format(bb_center[0], bb_center[1]))
+            logger.debug("BB center {}x{}".format(bb_center[0], bb_center[1]))
 
             # BB_CENTER TÁ CERTO, CHEQUEI
             bb_center_img = background_img.copy()
@@ -62,24 +69,25 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
 
             
             
-            #logger.info(" Dimensoes do personagem: {} {}".format(w_os, h_os))
+            logger.debug(" Dimensoes do personagem: {} {}".format(w_os, h_os))
             personagem_ratio = h_os/w_os
-            #logger.info(" Ratio do personagem: {}".format(personagem_ratio))
+            logger.debug(" Ratio do personagem: {}".format(personagem_ratio))
             #transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size)  # pegando copia da foto do babu para dar resize com as dim. detectadas
             # cv2.INTER_CUBIC eh slow segundo o opencv, testar dps ver se faz diferenca no result
             transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), overlay_size, interpolation = cv2.INTER_LINEAR)
-            #logger.info(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
+            logger.debug(" Tamanho depois do 1o resize: {}".format(transparent_image_overlay.shape))
             transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=1, fy=personagem_ratio, interpolation = cv2.INTER_LINEAR)
+            
             if participante == 'rafa':
                 transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_rafa, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
-            if participante == 'manu':
+            elif participante == 'manu':
                 transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_manu, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
-            if participante == 'thelma':
+            elif participante == 'thelma':
                 transparent_image_overlay = cv2.resize(transparent_image_overlay.copy(), None, fx=multiplicador_thelma, fy=multiplicador_rafa, interpolation = cv2.INTER_LINEAR)
 
-            #logger.info(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
+            logger.debug(" Tamanho depois do 2o resize: {}".format(transparent_image_overlay.shape))
             #logging.info("tioverl_x e y: {} {}".format(w, h))
-            #logging.info("Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
+            logging.debug(" Resizing da imagem feito, novo tamanho: {}x{}".format(overlay_size[0], overlay_size[1]))
 
         # Extract the alpha mask of the RGBA image, convert to RGB
         b, g, r, a = cv2.split(transparent_image_overlay)
@@ -131,48 +139,51 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         #logger.info(" BG Image Shape: {}".format(bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x].shape))
         #logger.info(" img1_bg: {}".format(img1_bg.shape))
         bg_img[primeiro_vertice_y : segundo_vertice_y, primeiro_vertice_x : segundo_vertice_x] = cv2.add(img1_bg, img2_fg)
-        logger.info(" ytanp im over x: {}".format(w))
-        logger.info(" tranp img over y: {}".format(h))
-        logger.info(" h,w: {} {}".format(h,w))
-
-
+        logger.debug(" ytanp im over x: {}".format(w))
+        logger.debug(" tranp img over y: {}".format(h))
+        logger.debug(" h,w: {} {}".format(h,w))
 
         #cv2.waitKey(0)
-
         return bg_img
 
-    except:
-        logger.error("Por alguma razão, não deu, amigo.")
-        return "Deu ruim"
+    except Exception as e:
+        logger.error("Por alguma razão, não deu, amigo. :".format(str(e)))
+        # Qual imagem retornar? return img1_bg, rostoEncontrado
+        return bg_img
 
-def main(keywords):
+def main(keywords, logger_level):
+    # Herdando a estrutura do logger passada pelo argparse
+    logging.basicConfig(level=logger_level)
+    logger = logging.getLogger()
     participante, user = keywords
     downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
-    #logger.info(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
-    #logger.info(" Caminho da imagem editada: {}".format(edited_photo_path))
+    #logger.debug(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
+    #logger.debug(" Caminho da imagem editada: {}".format(edited_photo_path))
     logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
     participante_img_path = os.path.join("../img/", participante + ".png")
-    logger.info(" Carregando imagem do participante: {}".format(participante_img_path))
     participante_img = cv2.imread(participante_img_path, -1)
     #cv2.imshow('teste', participante_img)
     img = cv2.imread(downloaded_photo_path)
+    
+    rostoEncontrado = True
+
     faces = face_recognition(img)
+    if len(faces) == 0:
+        rostoEncontrado = False
 
-    # No caso de 3 faces, o for fara 3 iteracoes
-    for (x, y, w, h) in faces:
-
-        img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
-        if img == "Deu ruim":
-            break
-        logging.info("Um novo rosto foi transformado no de {}".format(participante))
-    if img != "Deu ruim":
-        cv2.imwrite(edited_photo_path, img)
+    elif(rostoEncontrado):
+        # No caso de 3 faces, o for fara 3 iteracoes
+        for (x, y, w, h) in faces:
+            img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
+            cv2.imwrite(edited_photo_path, img)
+            # Confirmar com Dan se eh aqui mesmo
+            logging.info(" Um novo rosto foi transformado no de {}".format(participante))
 
 
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main(["rafa", "test"])
+    main(["babu", "boramofio"])
