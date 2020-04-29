@@ -2,8 +2,8 @@ import cv2
 import logging
 import os
 
-#logging.basicConfig(level=logging.DEBUG)
-#logger = logging.getLogger()
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger()
 
 photo_directory_downloaded = "../img/baixadas"
 photo_directory_edited = "../img/editadas"
@@ -153,8 +153,6 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
 
 def main(keywords, logger_level):
     # Herdando a estrutura do logger passada pelo argparse
-    logging.basicConfig(level=logger_level)
-    logger = logging.getLogger()
     participante, user = keywords
     downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
