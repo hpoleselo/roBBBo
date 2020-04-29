@@ -2,16 +2,12 @@ import cv2
 import logging
 import os
 
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger()
+# se não tiver nehum outro logger startado, ele vai usar o basic config
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 photo_directory_downloaded = "../img/baixadas"
 photo_directory_edited = "../img/editadas"
-
-#TODO DEIXAR GERAL, PRA QUALQUER PARTICIPANTE
-#TODO MELHORAR TRANSPARENCIA DO BABU
-#TODO MUDAR PERSPECTIVA DO ROSTO
-#TODO MELHORAR RECONHECIMENTO DE ROSTO
 
 
 def face_recognition(img_with_faces):
@@ -24,7 +20,7 @@ def face_recognition(img_with_faces):
         logger.info(" Foram encontrados {} rostos na figura".format(faces_found.shape[0]))
         return faces_found
     except AttributeError as e:
-        logger.warning("Não foi encontrada nenhuma face.")
+        logger.exception("Não foi encontrada nenhuma face.")
         faces_found = ()
         return faces_found
 
@@ -147,37 +143,35 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         return bg_img
 
     except Exception as e:
-        logger.exception("Por alguma razão, não deu, amigo. :".format(str(e)))
+        logger.exception("Por alguma razão, não deu, amigo.")
         # Qual imagem retornar? return img1_bg, rostoEncontrado
         return bg_img
 
-def main(keywords, logger_level):
-    # Herdando a estrutura do logger passada pelo argparse
+def main(keywords):
+    #TODO FALTAM ALGUNS TRIES, TIPO NA HORA DE SALVAR A IMG EDITADA
     participante, user = keywords
     downloaded_photo_path = os.path.join(photo_directory_downloaded, participante, user + ".jpg")
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
-    #logger.debug(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
-    #logger.debug(" Caminho da imagem editada: {}".format(edited_photo_path))
+    logger.debug(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
+    logger.debug(" Caminho da imagem editada: {}".format(edited_photo_path))
     logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
     participante_img_path = os.path.join("../img/", participante + ".png")
     participante_img = cv2.imread(participante_img_path, -1)
     #cv2.imshow('teste', participante_img)
     img = cv2.imread(downloaded_photo_path)
-    
     rostoEncontrado = True
-
     faces = face_recognition(img)
     if len(faces) == 0:
         rostoEncontrado = False
-
     elif(rostoEncontrado):
         # No caso de 3 faces, o for fara 3 iteracoes
         for (x, y, w, h) in faces:
             img = overlay_transparent(img, participante_img, x, y, participante,(w, h))
             cv2.imwrite(edited_photo_path, img)
             # Confirmar com Dan se eh aqui mesmo
-            logging.info(" Um novo rosto foi transformado no de {}".format(participante))
+            logging.debug(" Um novo rosto foi transformado no de {}".format(participante))
+        logger.info("Imagem com os rostos trocados salva em {}".format(edited_photo_path))
 
 
     #cv2.waitKey(0)
