@@ -1,15 +1,26 @@
-import tweepy
 import logging
+import argparse
 import json
 import os
 import urllib
+import tweepy
+# Nossos scripts
 from twitter_config import create_api
 from talker_bot import talker_bot
 import face_detection
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-v", help="Aciona o modo Debug do logging.")
+args = parser.parse_args()
+if args.v:
+    logger_level = logging.DEBUG
+else:
+    logger_level = logging.INFO
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logger_level)
 logger = logging.getLogger()
+logger.info("Usando o modo {}".format(logger_level))
+
 
 photo_directory = "../img/baixadas"
 
@@ -33,7 +44,7 @@ class hashtagListener(tweepy.StreamListener):
                     filename = os.path.join(photo_directory, pessoa, picName)
                     # talvez vamos ter que usar o agent (https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c)
                     urllib.request.urlretrieve(link, filename)
-                    face_detection.main([pessoa, photoOwner])
+                    face_detection.main([pessoa, photoOwner], logger_level)
                     talker_bot(self.api, tweet, pessoa)
             else:
                 logger.info("Esse post não tem imagem")
@@ -43,11 +54,10 @@ class hashtagListener(tweepy.StreamListener):
 def main(keywords):
     api = create_api()
     tweets_listener = hashtagListener(api)
-    logger.info("Escutando a hashtag...")
     stream = tweepy.Stream(api.auth, tweets_listener)
     #Streams do not terminate unless the connection is closed, blocking the thread. Tweepy offers a convenient is_async parameter on filter so the stream will run on a new thread. For example
     stream.filter(track=keywords)
-    logger.info("Hashtag escutada...")
+    logger.debug(" Escutando a hashtag...")
 
 if __name__ == "__main__":
     main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
