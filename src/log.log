@@ -30,3 +30,6 @@
 2020-04-29 13:22:21,363 - tweepy.binder - INFO - PARAMS: {}
 2020-04-29 13:22:21,852 - twitter_config - INFO - Autenticação Feita na api
 2020-04-29 13:22:45,564 - __main__ - WARNING - Saindo do programa
+2020-04-29 13:26:54,836 - tweepy.binder - INFO - PARAMS: {}
+2020-04-29 13:26:55,363 - twitter_config - INFO - Autenticação Feita na api
+2020-04-29 13:26:55,974 - __main__ - WARNING - Saindo do programa

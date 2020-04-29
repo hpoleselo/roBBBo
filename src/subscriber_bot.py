@@ -2,8 +2,10 @@ import logging
 import argparse
 import json
 import os
+import sys
 import urllib
 import tweepy
+
 # Nossos scripts
 from twitter_config import create_api
 from talker_bot import talker_bot
@@ -60,4 +62,5 @@ if __name__ == "__main__":
         main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
     except KeyboardInterrupt:
         logger.warning("Saindo do programa")
+        sys.exit()
 
