@@ -23,7 +23,7 @@
 </p> 
 
 <p align="center"> 
-  <img src="https://user-images.githubusercontent.com/24254286/80443054-b2afad00-88e4-11ea-8150-36806f0f491e.gif">
+  <img src="https://user-images.githubusercontent.com/24254286/80611432-fa335780-8a10-11ea-9f8f-6b5da93dbb47.gif">
 </p>
 
 <p align="center">
@@ -71,7 +71,7 @@ Distributed under the BSD 3-Clause License. See `LICENSE` for more information.
 <!-- Usando anchor pra poder referenciar este header no menu acima -->
 <!-- Para referencia-lo, fazemos: Me leve para [Créditos](#credits) -->
 ## <a name="credits"></a> Créditos
+* [remove.bg](https://www.remove.bg/) - Para deixar o fundo transparente em .png
+* [Ezgif](https://ezgif.com/) - Para gerar os gifs usados nesta página
 * [Técnica do overlay das imagens](https://gist.github.com/clungzta/b4bbb3e2aa0490b0cfcbc042184b0b4e)
-* https://www.remove.bg/ - Para deixar o fundo transparente em .png
 * GIMP - Para o corte de imagens e deixar apenas a face
-* ezgif - Para gerar os gifs usados nesta página
