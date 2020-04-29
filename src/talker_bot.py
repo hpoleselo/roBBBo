@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 photo_directory = "../img/editadas"
 
 def talker_bot(api, tweet, pessoa):
-    logger.info("Iniciando o bot falador")
+    logger.debug("Iniciando o bot falador")
     user = tweet.user.screen_name
     logger.info("Vou responder o tweet de {}".format(user))
     try:

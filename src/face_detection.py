@@ -154,7 +154,6 @@ def main(keywords):
     edited_photo_path = os.path.join(photo_directory_edited, participante, user + ".jpg")
     logger.debug(" Caminho da imagem baixada: {}".format(downloaded_photo_path))
     logger.debug(" Caminho da imagem editada: {}".format(edited_photo_path))
-    logger.info(" Carregando a imagem do participante {}".format(participante))
     # -1 carrega a img com fundo transparente
     participante_img_path = os.path.join("../img/", participante + ".png")
     participante_img = cv2.imread(participante_img_path, -1)
@@ -171,7 +170,8 @@ def main(keywords):
             cv2.imwrite(edited_photo_path, img)
             # Confirmar com Dan se eh aqui mesmo
             logging.debug(" Um novo rosto foi transformado no de {}".format(participante))
-        logger.info("Imagem com os rostos trocados salva em {}".format(edited_photo_path))
+        logger.info("Imagem editada salva com sucesso")
+        logger.debug("Imagem com os rostos trocados salva em {}".format(edited_photo_path))
 
 
     #cv2.waitKey(0)

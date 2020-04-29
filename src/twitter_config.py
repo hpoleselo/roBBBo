@@ -28,7 +28,7 @@ def create_api():
     except:
         logger.exception("Erro na autenticação, finalizando a aplicação")
         sys.exit()
-    logger.info("Autenticação Feita na api feita")
+    logger.info("Autenticação Feita na api")
     return api
 
 if __name__ == "__main__":

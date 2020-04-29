@@ -9,6 +9,7 @@ from twitter_config import create_api
 from talker_bot import talker_bot
 import face_detection
 
+"""
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", help="Aciona o modo Debug do logging.")
 args = parser.parse_args()
@@ -20,7 +21,9 @@ else:
 logging.basicConfig(level=logger_level)
 logger = logging.getLogger()
 logger.info("Usando o modo {}".format(logger_level))
+"""
 
+logger = logging.getLogger(__name__)
 
 photo_directory = "../img/baixadas"
 
@@ -34,7 +37,7 @@ class hashtagListener(tweepy.StreamListener):
             if 'hashtags' in tweet.entities:
                 # 0 pra pegar a primeira hashtag, 6: pra tirar o robbbo
                 pessoa = tweet.entities['hashtags'][0]["text"][6:]
-                logger.info("Torcida para {}".format(pessoa))
+                logger.info("Novo tweet torcendo para {}".format(pessoa))
             if 'media' in tweet.entities:
                 for image in tweet.entities['media']:
                     photoOwner = tweet.user.screen_name
@@ -44,14 +47,17 @@ class hashtagListener(tweepy.StreamListener):
                     filename = os.path.join(photo_directory, pessoa, picName)
                     # talvez vamos ter que usar o agent (https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c)
                     urllib.request.urlretrieve(link, filename)
-                    face_detection.main([pessoa, photoOwner], logger_level)
+                    face_detection.main([pessoa, photoOwner])
                     talker_bot(self.api, tweet, pessoa)
             else:
                 logger.info("Esse post não tem imagem")
         except Exception as e:
-            logger.exception("Erro ao favoritar tweet, erro:" + str(e))
+            logger.exception("Erro ao favoritar tweet, erro:")
 
 def main(keywords):
+    import logging.config
+    logging.config.fileConfig('loggers.conf', disable_existing_loggers=False)
+    logger.error("Inicio do main")
     api = create_api()
     tweets_listener = hashtagListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
@@ -60,4 +66,5 @@ def main(keywords):
     logger.debug(" Escutando a hashtag...")
 
 if __name__ == "__main__":
+    logger.error("COMECANDO ")
     main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
