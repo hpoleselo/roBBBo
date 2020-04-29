@@ -56,6 +56,8 @@ def main(keywords):
     logger.debug(" Escutando a hashtag...")
 
 if __name__ == "__main__":
-    main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
-
+    try:
+        main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
+    except KeyboardInterrupt:
+        logger.warning("Saindo do programa")
 

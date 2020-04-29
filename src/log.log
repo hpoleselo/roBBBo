@@ -27,3 +27,6 @@
 2020-04-29 13:18:38,410 - requests_oauthlib.oauth1_auth - DEBUG - Updated body: 'track=%23roBBBoBabu%2C%23roBBBoManu%2C%23roBBBoRafa%2CroBBBoThelma'
 2020-04-29 13:18:38,412 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): stream.twitter.com:443
 2020-04-29 13:18:39,179 - urllib3.connectionpool - DEBUG - https://stream.twitter.com:443 "POST /1.1/statuses/filter.json?delimited=length HTTP/1.1" 200 None
+2020-04-29 13:22:21,363 - tweepy.binder - INFO - PARAMS: {}
+2020-04-29 13:22:21,852 - twitter_config - INFO - Autenticação Feita na api
+2020-04-29 13:22:45,564 - __main__ - WARNING - Saindo do programa
