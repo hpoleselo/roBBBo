@@ -9,16 +9,7 @@ from twitter_config import create_api
 from talker_bot import talker_bot
 import face_detection
 
-"""
-
-
-logging.basicConfig(level=logger_level)
-logger = logging.getLogger()
-logger.info("Usando o modo {}".format(logger_level))
-"""
-
 logger = logging.getLogger(__name__)
-
 photo_directory = "../img/baixadas"
 
 
