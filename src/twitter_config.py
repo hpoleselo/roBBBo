@@ -1,15 +1,19 @@
 import tweepy
 import logging
 import os
+import sys
 
-logger = logging.getLogger()
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def create_api():
-    #TODO CORRIGIR QUE ELE NAO FALA NADA QUANDO TA ERRADA
     api_key = os.getenv("API_KEY")
     api_secret_key = os.getenv("API_SECRET_KEY")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+    if not api_key or not api_secret_key or not access_token or not access_token_secret:
+        logger.error("Encerrando o programa, pelo menos uma key não foi definida")
+        sys.exit()
 
     # autenticar usuário
     auth = tweepy.OAuthHandler(api_key, api_secret_key)
@@ -21,9 +25,11 @@ def create_api():
 
     try:
         api.verify_credentials()
-    except Exception as e:
-        logger.error("Erro na autenticação")
-        raise e
-    logger.info("Autenticação Feita")
-    logger.info("API criada")
+    except:
+        logger.exception("Erro na autenticação, finalizando a aplicação")
+        sys.exit()
+    logger.info("Autenticação Feita na api feita")
     return api
+
+if __name__ == "__main__":
+    create_api()
