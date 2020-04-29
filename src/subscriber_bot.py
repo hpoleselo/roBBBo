@@ -49,7 +49,7 @@ class hashtagListener(tweepy.StreamListener):
             else:
                 logger.info("Esse post não tem imagem")
         except Exception as e:
-            logger.error("Erro ao favoritar tweet, erro:" + str(e))
+            logger.exception("Erro ao favoritar tweet, erro:" + str(e))
 
 def main(keywords):
     api = create_api()

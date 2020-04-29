@@ -30,4 +30,4 @@ def talker_bot(api, tweet, pessoa):
         else:
             logger.info("O tweet é seu mesmo, não vou repostar")
     except Exception as e:
-        logging.info("Erro ao postar tweet, erro:" + str(e))
+        logging.exception("Erro ao postar tweet")

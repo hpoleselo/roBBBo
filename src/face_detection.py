@@ -147,7 +147,7 @@ def overlay_transparent(background_img, transparent_image_overlay, x, y, partici
         return bg_img
 
     except Exception as e:
-        logger.error("Por alguma razão, não deu, amigo. :".format(str(e)))
+        logger.exception("Por alguma razão, não deu, amigo. :".format(str(e)))
         # Qual imagem retornar? return img1_bg, rostoEncontrado
         return bg_img
 
