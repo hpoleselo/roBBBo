@@ -10,13 +10,7 @@ from talker_bot import talker_bot
 import face_detection
 
 """
-parser = argparse.ArgumentParser()
-parser.add_argument("-v", help="Aciona o modo Debug do logging.")
-args = parser.parse_args()
-if args.v:
-    logger_level = logging.DEBUG
-else:
-    logger_level = logging.INFO
+
 
 logging.basicConfig(level=logger_level)
 logger = logging.getLogger()
@@ -57,7 +51,12 @@ class hashtagListener(tweepy.StreamListener):
 def main(keywords):
     import logging.config
     logging.config.fileConfig('loggers.conf', disable_existing_loggers=False)
-    logger.error("Inicio do main")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-v", action='store_true', help="Aciona o modo Debug do logging.")
+    args = parser.parse_args()
+    if args.v:
+        logging.getLogger().setLevel(logging.DEBUG)
+        logger.debug("Nível do logger: {}".format(logging.getLogger().level))
     api = create_api()
     tweets_listener = hashtagListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
@@ -66,5 +65,6 @@ def main(keywords):
     logger.debug(" Escutando a hashtag...")
 
 if __name__ == "__main__":
-    logger.error("COMECANDO ")
     main(["#roBBBoBabu", "#roBBBoManu", "#roBBBoRafa", "roBBBoThelma"])
+
+
